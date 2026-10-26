@@ -5,6 +5,9 @@ import typescriptEslintPlugin from '@typescript-eslint/eslint-plugin';
 
 export default [
   {
+    ignores: ['.next/**', 'node_modules/**'],
+  },
+  {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
       parser: typescriptParser,
