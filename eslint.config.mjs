@@ -23,7 +23,7 @@ export default [
     },
     rules: {
       '@next/next/no-html-link-for-pages': 'error',
-      'prettier/prettier': 'error',
+      'prettier/prettier': ['error', { endOfLine: 'auto' }],
       '@typescript-eslint/no-explicit-any': 'error',
     },
   },
