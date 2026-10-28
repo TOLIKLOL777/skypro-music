@@ -5,29 +5,24 @@
   background-color: #383838;
 }
 
-.playlistTitle__col {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 2px;
-  color: #696969;
-  text-transform: uppercase;
+.container {
+  max-width: 1920px;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  background-color: #181818;
 }
 
-.col01 {
-  width: 447px;
-}
-
-.col02 {
-  width: 321px;
-}
-
-.col03 {
-  width: 245px;
-}
-
-.col04 {
-  width: 60px;
-  text-align: end;
+.main {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
