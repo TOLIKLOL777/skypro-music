@@ -1,10 +1,39 @@
+'use client';
+
 import Link from 'next/link';
 import classNames from 'classnames';
 import styles from './Bar.module.css';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { useRef } from 'react';
+import { setIsPlay } from '@/store/features/trackSlice';
 
 export default function Bar() {
+  const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
+  const isPlay = useAppSelector((state) => state.tracks.isPlay);
+  const dispatch = useAppDispatch();
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  if (!currentTrack) return <></>;
+
+  const playTrack = () => {
+    audioRef.current?.play();
+    dispatch(setIsPlay(true));
+  };
+
+  const pauseTrack = () => {
+    audioRef.current?.pause();
+    dispatch(setIsPlay(false));
+  };
+
   return (
     <div className={styles.bar}>
+      <audio
+        ref={audioRef}
+        controls
+        src={currentTrack?.track_file}
+        hidden
+      ></audio>
       <div className={styles.bar__content}>
         <div className={styles.bar__playerProgress}></div>
         <div className={styles.bar__playerBlock}>
@@ -15,9 +44,18 @@ export default function Bar() {
                   <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                 </svg>
               </div>
-              <div className={classNames(styles.player__btnPlay, styles.btn)}>
+              <div
+                className={classNames(styles.player__btnPlay, styles.btn)}
+                onClick={isPlay ? pauseTrack : playTrack}
+              >
                 <svg className={styles.player__btnPlaySvg}>
-                  <use xlinkHref="/img/icon/sprite.svg#icon-play"></use>
+                  <use
+                    xlinkHref={
+                      isPlay
+                        ? '/img/icon/sprite.svg#icon-pause'
+                        : '/img/icon/sprite.svg#icon-play'
+                    }
+                  ></use>
                 </svg>
               </div>
               <div className={styles.player__btnNext}>
@@ -53,12 +91,12 @@ export default function Bar() {
                 </div>
                 <div className={styles.trackPlay__author}>
                   <Link className={styles.trackPlay__authorLink} href="">
-                    Ты та...
+                    {currentTrack.name}
                   </Link>
                 </div>
                 <div className={styles.trackPlay__album}>
                   <Link className={styles.trackPlay__albumLink} href="">
-                    Баста
+                    {currentTrack.author}
                   </Link>
                 </div>
               </div>

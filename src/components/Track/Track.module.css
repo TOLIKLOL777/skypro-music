@@ -121,3 +121,26 @@
     text-align: right;
     color: #696969;
 }
+
+
+.point {
+  width: 16px;
+  height: 16px;
+  background-color: #b672ff;
+  border-radius: 50%;
+  display: block;
+}
+
+.pointActive {
+  animation: pulse 1.2s ease-in-out infinite both;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+}
