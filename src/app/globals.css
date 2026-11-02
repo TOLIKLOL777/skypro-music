@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: var(--font-monserrat) 'Arial';
+  font-family: var(--font-montserrat), 'Arial';
 }
 
 h1,
@@ -21,7 +21,7 @@ p {
 a,
 input,
 button {
-  font-family: var(--font-monserrat), 'Arial';
+  font-family: var(--font-montserrat), 'Arial';
 }
 
 a {

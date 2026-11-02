@@ -6,7 +6,7 @@ import styles from './Navigation.module.css';
 import { useState } from 'react';
 
 export default function Navigation() {
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <nav className={styles.main__nav}>
       <div className={styles.nav__logo}>
