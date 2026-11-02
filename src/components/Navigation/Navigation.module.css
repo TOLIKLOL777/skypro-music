@@ -2,6 +2,7 @@
   width: 244px;
   background-color: #181818;
   padding: 20px 0 20px 36px;
+  position: relative;
 }
 
 .nav__logo {
@@ -26,11 +27,20 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+
+  & :hover {
+    cursor: pointer;
+  }
 }
 
 .nav__menu {
   display: block;
   visibility: visible;
+  position: absolute;
+  z-index: 10;
+  background-color: #181818;
+  width: 244px;
+  padding: 0 0 0 36px;
 }
 
 .logo__image {

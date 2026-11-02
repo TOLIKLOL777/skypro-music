@@ -1,6 +1,6 @@
 import './page.css';
 import styles from './page.module.css';
-import Bar from '@/components/bar/Bar';
+import Bar from '@/components/Bar/Bar';
 import Navigation from '@/components/Navigation/Navigation';
 import { CenterBlock } from '@/components/CenterBlock/CenterBlock';
 import Sidebar from '@/components/SideBar/SideBar';
