@@ -5,7 +5,7 @@ import typescriptEslintPlugin from '@typescript-eslint/eslint-plugin';
 
 export default [
   {
-    ignores: ['.next/**', 'node_modules/**'],
+    ignores: ['.next/**', 'node_modules/**', 'next-env.d.ts'],
   },
   {
     files: ['**/*.ts', '**/*.tsx'],
