@@ -5,8 +5,13 @@ import { SearchBlock } from '../Search/SearchBlock';
 import Track from '@/components/Track/Track';
 import { data } from '@/data';
 import Filter from '../Filter/Filter';
+import { TrackType } from '@/sharedTypes/sharedTypes';
 
-export function CenterBlock() {
+type TrackProps = {
+  tracks: TrackType[];
+};
+
+export function CenterBlock({ tracks }: TrackProps) {
   return (
     <div className={styles.centerblock}>
       <SearchBlock />
@@ -30,7 +35,7 @@ export function CenterBlock() {
           </div>
         </div>
         <div className={styles.content__playlist}>
-          {data.map((track) => (
+          {tracks.map((track) => (
             <Track key={track._id} track={track} playlist={data} />
           ))}
         </div>
