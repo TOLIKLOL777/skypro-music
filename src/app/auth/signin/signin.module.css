@@ -13,6 +13,10 @@
   background-color: #271a58;
 }
 
+.modal__btnEnter:disabled {
+  background-color: grey;
+}
+
 .modal__btnSignup:active {
   background-color: #d9d9d9;
 }

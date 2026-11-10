@@ -12,3 +12,9 @@ export type TrackType = {
 };
 
 export type TrackTypes = TrackType[];
+
+export type AuthUserType = {
+  _id?: number;
+  email: string;
+  username?: string;
+};

@@ -41,7 +41,6 @@
   }
 }
 
-.error_messange,
 .error_message {
   width: calc(100% - 72px);
   margin: 20px 36px 10px;
@@ -56,7 +55,6 @@
   box-sizing: border-box;
 }
 
-.error_messange p,
 .error_message p,
 .error_text {
   font-size: 16px;
@@ -67,7 +65,6 @@
   word-break: break-word;
 }
 
-.error_messange button,
 .error_message button,
 .error_button {
   padding: 10px 24px;
@@ -84,14 +81,12 @@
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.error_messange button:hover,
 .error_message button:hover,
 .error_button:hover {
   background-color: #3f007d;
   border-color: #3f007d;
 }
 
-.error_messange button:active,
 .error_message button:active,
 .error_button:active {
   background-color: #271a58;
@@ -99,11 +94,23 @@
 }
 
 @media (max-width: 768px) {
-  .error_messange,
   .error_message {
     flex-direction: column;
     align-items: flex-start;
     width: calc(100% - 40px);
     margin: 15px 20px;
   }
+}
+
+.loading {
+  flex-grow: 3;
+  padding: 20px 40px 20px 111px;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.center_error_wrapper {
+  flex-grow: 3;
+  display: flex;
+  flex-direction: column;
 }

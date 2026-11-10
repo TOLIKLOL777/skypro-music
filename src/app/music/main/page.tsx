@@ -3,53 +3,56 @@
 import styles from './page.module.css';
 import Bar from '@/components/Bar/Bar';
 import Navigation from '@/components/Navigation/Navigation';
-import { CenterBlock } from '@/components/CenterBlock/CenterBlock';
 import Sidebar from '@/components/SideBar/SideBar';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { getTracks } from '@/services/tracks/tracksapi';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { AxiosError } from 'axios';
+import TracksSection from '@/components/TracksSection/TracksSection';
+
+type TracksResult = {
+  tracks: TrackType[];
+  error: string;
+};
+
+async function loadTracks(): Promise<TracksResult> {
+  return getTracks()
+    .then((tracks) => ({ tracks, error: '' }))
+    .catch((err: unknown) => {
+      if (err instanceof AxiosError) {
+        if (err.response) {
+          return { tracks: [], error: String(err.response.data) };
+        }
+        if (err.request) {
+          return { tracks: [], error: 'Ошибка подключения к серверу' };
+        }
+        return { tracks: [], error: `Неизвестная ошибка: ${err.message}` };
+      }
+      return { tracks: [], error: 'Не удалось загрузить треки' };
+    });
+}
 
 export default function Home() {
-  const [tracks, setTracks] = useState<TrackType[]>([]);
-  const [error, setError] = useState('');
-
-  const handleReload = () => {
-    window.location.reload();
-  };
+  const [tracks, setTracks] = useState<Promise<TracksResult> | null>(null);
 
   useEffect(() => {
-    getTracks()
-      .then((res) => {
-        setTracks(res);
-        console.log(res[0].album);
-      })
-      .catch((error) => {
-        if (error instanceof AxiosError) {
-          if (error.response) {
-            setError(error.response.data);
-          } else if (error.request) {
-            setError(`Ошибка подключения: ${error.request}`);
-          } else {
-            setError(`Неизвестная ошибка: ${error.message}`);
-          }
-        }
-      });
+    setTracks(loadTracks());
   }, []);
+
+  const handleReload = () => {
+    setTracks(loadTracks());
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <main className={styles.main}>
-          {error && (
-            <div className={styles.error_messange}>
-              <p className={styles.error_text}>{error}</p>
-              <button className={styles.error_button} onClick={handleReload}>
-                Перезагрузить страницу
-              </button>
-            </div>
-          )}
           <Navigation />
-          <CenterBlock tracks={tracks} />
+          <Suspense
+            fallback={<p className={styles.loading}>Загрузка музыки...</p>}
+          >
+            <TracksSection tracksPromise={tracks} onReload={handleReload} />
+          </Suspense>
           <Sidebar />
         </main>
         <Bar />

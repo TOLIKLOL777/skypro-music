@@ -45,6 +45,10 @@
   background-color: #271a58;
 }
 
+.modal__btnSignupEnt:disabled {
+  background-color: grey;
+}
+
 .modal__block {
   position: absolute;
   z-index: 2;

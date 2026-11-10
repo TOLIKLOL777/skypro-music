@@ -1,21 +1,11 @@
-'use client';
-
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 import styles from './layout.module.css';
-import { Login } from '@/services/auth/authapi';
 
 interface AuthLayoutPage {
   children: ReactNode;
 }
 
 export default function AuthLayout({ children }: AuthLayoutPage) {
-  const data = {
-    login: 'admin',
-    password: 'admin',
-  };
-  useEffect(() => {
-    Login(data);
-  }, []);
   return (
     <>
       <div className={styles.wrapper}>
