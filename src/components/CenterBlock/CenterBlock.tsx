@@ -8,13 +8,14 @@ import { TrackType } from '@/sharedTypes/sharedTypes';
 
 type TrackProps = {
   tracks: TrackType[];
+  title?: string;
 };
 
-export function CenterBlock({ tracks }: TrackProps) {
+export function CenterBlock({ tracks, title = 'Треки' }: TrackProps) {
   return (
     <div className={styles.centerblock}>
       <SearchBlock />
-      <h2 className={styles.centerblock__h2}>Треки</h2>
+      <h2 className={styles.centerblock__h2}>{title}</h2>
       <Filter tracks={tracks} />
       <div className={styles.centerblock__content}>
         <div className={styles.content__title}>

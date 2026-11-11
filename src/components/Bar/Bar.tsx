@@ -27,7 +27,6 @@ export default function Bar() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    setVolume(0.5);
     setIsLoaded(false);
   }, [currentTrack]);
 
@@ -35,6 +34,7 @@ export default function Bar() {
 
   const playTrack = () => {
     audioRef.current?.play();
+    setVolume(0.5);
     dispatch(setIsPlay(true));
   };
 
