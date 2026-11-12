@@ -1,6 +1,6 @@
 'use client';
 
-import { Login } from '@/services/auth/authapi';
+import { getTokens, Login } from '@/services/auth/authapi';
 import styles from './signin.module.css';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -49,9 +49,16 @@ export default function Signin() {
     setIsLoading(true);
     Login({ email, password })
       .then((res) => {
-        const authUser = extractAuthUser(res, { email });
+        const authUser = extractAuthUser(res, {
+          email,
+          username: res.username,
+        });
         localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));
         dispatch(setAuth(authUser));
+        return getTokens({ email, password });
+      })
+      .then((res) => {
+        console.log(res);
         router.replace('/music/main');
       })
       .catch((err) => {

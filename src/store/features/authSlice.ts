@@ -9,25 +9,29 @@ export function extractAuthUser(
 ): AuthUserType {
   const responseObj = (res ?? {}) as {
     _id?: number;
+    id?: number;
     email?: string;
     username?: string;
     data?: {
       _id?: number;
+      id?: number;
       email?: string;
       username?: string;
       user?: Partial<AuthUserType>;
       data?: Partial<AuthUserType>;
     };
+    user?: Partial<AuthUserType>;
   };
   const userPayload =
     responseObj.data?.user ??
     responseObj.data?.data ??
+    responseObj.user ??
     responseObj.data ??
     responseObj;
 
   return {
-    _id: userPayload?._id,
-    username: userPayload?.username || fallback.username,
+    _id: userPayload?._id ?? (userPayload as { id?: number })?.id,
+    username: userPayload?.username || fallback.username || '',
     email: userPayload?.email || fallback.email,
   };
 }
