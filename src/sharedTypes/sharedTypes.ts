@@ -11,4 +11,18 @@ export type TrackType = {
   stared_user: number[];
 };
 
+export type PlaylistType = {
+  _id: number;
+  name: string;
+  items: number[];
+  owner: number[];
+  _v: number;
+};
+
 export type TrackTypes = TrackType[];
+
+export type AuthUserType = {
+  _id?: number;
+  email: string;
+  username?: string;
+};
