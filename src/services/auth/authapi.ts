@@ -57,9 +57,9 @@ export async function getTokens(userData: loginUser): Promise<tokensReturn> {
 }
 
 export async function refreshToken(
-  userData: loginUser,
+  refresh: string,
 ): Promise<{ access: string }> {
   return await axios
-    .post(BASE_URL + '/user/token/refresh/', userData)
+    .post(BASE_URL + '/user/token/refresh/', refresh)
     .then((res) => res.data);
 }

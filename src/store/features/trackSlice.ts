@@ -6,6 +6,7 @@ type initialStateType = {
   isPlay: boolean;
   playlist: TrackType[];
   shuffledPlaylist: TrackType[];
+  favoriteTracks: TrackType[];
   isShuffle: boolean;
   allTracks: TrackType[];
   fetchError: null | string;
@@ -17,6 +18,7 @@ const initialState: initialStateType = {
   isPlay: false,
   playlist: [],
   shuffledPlaylist: [],
+  favoriteTracks: [],
   isShuffle: false,
   allTracks: [],
   fetchError: null,
@@ -44,6 +46,22 @@ const trackSlice = createSlice({
     },
     setAllTracks: (state, action: PayloadAction<TrackType[]>) => {
       state.allTracks = action.payload;
+    },
+    setFavoriteTracks: (state, action: PayloadAction<TrackType[]>) => {
+      state.favoriteTracks = action.payload;
+    },
+    addLikedTracks: (state, action: PayloadAction<TrackType>) => {
+      const isExist = state.favoriteTracks.some(
+        (track) => track._id === action.payload._id,
+      );
+      if (!isExist) {
+        state.favoriteTracks.push(action.payload);
+      }
+    },
+    removeLikedTracks: (state, action: PayloadAction<TrackType>) => {
+      state.favoriteTracks = state.favoriteTracks.filter(
+        (track) => track._id !== action.payload._id,
+      );
     },
     setFetchError: (state, action: PayloadAction<null | string>) => {
       state.fetchError = action.payload;
@@ -90,5 +108,8 @@ export const {
   setAllTracks,
   setFetchError,
   setFetchIsLoading,
+  setFavoriteTracks,
+  addLikedTracks,
+  removeLikedTracks,
 } = trackSlice.actions;
 export const trackSliceReducer = trackSlice.reducer;

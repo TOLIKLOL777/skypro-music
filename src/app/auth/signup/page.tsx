@@ -1,6 +1,6 @@
 'use client';
 
-import { Register } from '@/services/auth/authapi';
+import { getTokens, Register } from '@/services/auth/authapi';
 import styles from './signup.module.css';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -11,8 +11,11 @@ import { useAppDispatch } from '@/store/store';
 import {
   AUTH_STORAGE_KEY,
   extractAuthUser,
+  setAccessToken,
   setAuth,
+  setRefreshToken,
 } from '@/store/features/authSlice';
+import Image from 'next/image';
 
 export default function SignUp() {
   const router = useRouter();
@@ -57,6 +60,11 @@ export default function SignUp() {
         const authUser = extractAuthUser(res, { email, username });
         localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));
         dispatch(setAuth(authUser));
+        return getTokens({ email, password });
+      })
+      .then((res) => {
+        dispatch(setAccessToken(res.access));
+        dispatch(setRefreshToken(res.refresh));
         router.replace('/music/main');
       })
       .catch((err) => {
@@ -83,7 +91,12 @@ export default function SignUp() {
     <>
       <Link href="/music/main">
         <div className={styles.modal__logo}>
-          <img src="/img/logo_modal.png" alt="logo" />
+          <Image
+            src="/img/logo_modal.png"
+            alt="logo"
+            width={250}
+            height={170}
+          />
         </div>
       </Link>
       <input

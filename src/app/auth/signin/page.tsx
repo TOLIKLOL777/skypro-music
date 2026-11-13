@@ -5,13 +5,16 @@ import styles from './signin.module.css';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { useState } from 'react';
+import Image from 'next/image';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch } from '@/store/store';
 import {
   AUTH_STORAGE_KEY,
   extractAuthUser,
+  setAccessToken,
   setAuth,
+  setRefreshToken,
 } from '@/store/features/authSlice';
 
 export default function Signin() {
@@ -58,7 +61,8 @@ export default function Signin() {
         return getTokens({ email, password });
       })
       .then((res) => {
-        console.log(res);
+        dispatch(setAccessToken(res.access));
+        dispatch(setRefreshToken(res.refresh));
         router.replace('/music/main');
       })
       .catch((err) => {
@@ -81,7 +85,12 @@ export default function Signin() {
     <>
       <a href="/music/main">
         <div className={styles.modal__logo}>
-          <img src="/img/logo_modal.png" alt="logo" />
+          <Image
+            src="/img/logo_modal.png"
+            alt="logo"
+            width={250}
+            height={170}
+          />
         </div>
       </a>
       <input

@@ -2,17 +2,22 @@
 
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { useEffect } from 'react';
-import { getTracks } from '@/services/tracks/tracksapi';
+import { getFavorite, getTracks } from '@/services/tracks/tracksapi';
 import {
   setAllTracks,
+  setFavoriteTracks,
   setFetchError,
   setFetchIsLoading,
 } from '@/store/features/trackSlice';
 import { AxiosError } from 'axios';
+import { withReauth } from '@/utils/withReauth';
 
 export default function FetchingTracks() {
   const dispatch = useAppDispatch();
   const { allTracks } = useAppSelector((state) => state.tracks);
+  const { accessToken, refreshToken, isAuth } = useAppSelector(
+    (state) => state.auth,
+  );
 
   useEffect(() => {
     if (allTracks.length) {
@@ -48,6 +53,24 @@ export default function FetchingTracks() {
         });
     }
   }, []);
+
+  useEffect(() => {
+    if (isAuth && accessToken && refreshToken) {
+      withReauth(
+        (token) => getFavorite(token || accessToken),
+        refreshToken,
+        dispatch,
+      )
+        .then((res) => {
+          dispatch(setFavoriteTracks(res));
+        })
+        .catch((error) => {
+          console.error('Ошибка загрузки избранных треков:', error);
+        });
+    } else if (!isAuth) {
+      dispatch(setFavoriteTracks([]));
+    }
+  }, [isAuth, accessToken, refreshToken, dispatch]);
 
   return null;
 }

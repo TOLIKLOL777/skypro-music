@@ -3,7 +3,7 @@
 import { PlaylistType, TrackType } from '@/sharedTypes/sharedTypes';
 import styles from './TracksSection.module.css';
 import { CenterBlock } from '@/components/CenterBlock/CenterBlock';
-import { use } from 'react';
+import { use, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getTracks } from '@/services/tracks/tracksapi';
 import {
@@ -44,6 +44,17 @@ export default function TracksSection({
   const tracksError = tracksFromPromise ? tracksFromPromise.error : fetchError;
 
   const error = tracksError || playlistData?.error;
+  const playlist = playlistData?.playlist;
+
+  const displayedTracks = useMemo(() => {
+    if (!playlist?.items) {
+      return tracks;
+    }
+    const trackMap = new Map(tracks.map((track) => [track._id, track]));
+    return playlist.items
+      .map((id) => trackMap.get(id))
+      .filter((track): track is TrackType => Boolean(track));
+  }, [playlist, tracks]);
 
   const handleReload = () => {
     if (onReload) {
@@ -98,14 +109,6 @@ export default function TracksSection({
       </div>
     );
   }
-
-  const playlist = playlistData?.playlist;
-  const trackMap = new Map(tracks.map((track) => [track._id, track]));
-  const displayedTracks = playlist?.items
-    ? playlist.items
-        .map((id) => trackMap.get(id))
-        .filter((track): track is TrackType => Boolean(track))
-    : tracks;
 
   return (
     <CenterBlock tracks={displayedTracks} title={playlist?.name || 'Треки'} />
