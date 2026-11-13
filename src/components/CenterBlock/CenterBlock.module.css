@@ -54,6 +54,12 @@
   overflow-y: auto;
 }
 
+.content_null {
+  color: #696969;
+  font-size: '18px';
+  margin-top: '20px';
+}
+
 .playlistTitle__svg {
   width: 12px;
   height: 12px;
