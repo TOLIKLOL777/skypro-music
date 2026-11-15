@@ -35,9 +35,13 @@ export function CenterBlock({ tracks, title = 'Треки' }: TrackProps) {
           </div>
         </div>
         <div className={styles.content__playlist}>
-          {tracks.map((track) => (
-            <Track key={track._id} track={track} playlist={tracks} />
-          ))}
+          {tracks.length === 0 ? (
+            <p className={styles.content_null}>В этом плейлисте нет треков</p>
+          ) : (
+            tracks.map((track) => (
+              <Track key={track._id} track={track} playlist={tracks} />
+            ))
+          )}
         </div>
       </div>
     </div>

@@ -6,7 +6,11 @@ type initialStateType = {
   isPlay: boolean;
   playlist: TrackType[];
   shuffledPlaylist: TrackType[];
+  favoriteTracks: TrackType[];
   isShuffle: boolean;
+  allTracks: TrackType[];
+  fetchError: null | string;
+  fetchIsLoading: boolean;
 };
 
 const initialState: initialStateType = {
@@ -14,7 +18,11 @@ const initialState: initialStateType = {
   isPlay: false,
   playlist: [],
   shuffledPlaylist: [],
+  favoriteTracks: [],
   isShuffle: false,
+  allTracks: [],
+  fetchError: null,
+  fetchIsLoading: true,
 };
 
 const trackSlice = createSlice({
@@ -35,6 +43,31 @@ const trackSlice = createSlice({
     },
     toggleShuffle: (state) => {
       state.isShuffle = !state.isShuffle;
+    },
+    setAllTracks: (state, action: PayloadAction<TrackType[]>) => {
+      state.allTracks = action.payload;
+    },
+    setFavoriteTracks: (state, action: PayloadAction<TrackType[]>) => {
+      state.favoriteTracks = action.payload;
+    },
+    addLikedTracks: (state, action: PayloadAction<TrackType>) => {
+      const isExist = state.favoriteTracks.some(
+        (track) => track._id === action.payload._id,
+      );
+      if (!isExist) {
+        state.favoriteTracks.push(action.payload);
+      }
+    },
+    removeLikedTracks: (state, action: PayloadAction<TrackType>) => {
+      state.favoriteTracks = state.favoriteTracks.filter(
+        (track) => track._id !== action.payload._id,
+      );
+    },
+    setFetchError: (state, action: PayloadAction<null | string>) => {
+      state.fetchError = action.payload;
+    },
+    setFetchIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.fetchIsLoading = action.payload;
     },
     setNextTrack: (state) => {
       const playlistToUse = state.isShuffle
@@ -72,5 +105,11 @@ export const {
   setNextTrack,
   setPrevTrack,
   toggleShuffle,
+  setAllTracks,
+  setFetchError,
+  setFetchIsLoading,
+  setFavoriteTracks,
+  addLikedTracks,
+  removeLikedTracks,
 } = trackSlice.actions;
 export const trackSliceReducer = trackSlice.reducer;
