@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# skypro-music
 
-## Getting Started
+Веб-приложение для прослушивания музыки. Учебный проект курса SkyPro, который я развиваю самостоятельно.
 
-First, run the development server:
+> Статус: в разработке.
+
+![alt text](image.png)
+
+## Что внутри
+
+- Список треков загружаюшихся с API
+- Плеер: пауза, перемотка, громкость, перемешивание и зацикливание треков
+- Авторизация и избранное
+- Сохрание и вход по ACCESS и REFRESH токенами
+- Приватный роутинг в разделе избранное
+
+## Стек
+
+- [Next.js](https://nextjs.org) (App Router)
+- TypeScript
+- ESLint и Prettier для единого стиля кода
+
+## Запуск локально
+
+Нужна актуальная LTS-версия Node.js.
 
 ```bash
+git clone https://github.com/TOLIKLOL777/skypro-music.git
+cd skypro-music
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Откройте [http://localhost:3000](http://localhost:3000) в браузере.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Команды
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Команда         | Что делает                     |
+| --------------- | ------------------------------ |
+| `npm run dev`   | запускает dev-сервер           |
+| `npm run build` | собирает проект для продакшена |
+| `npm run start` | запускает собранную версию     |
+| `npm run lint`  | проверяет код ESLint           |
 
-## Learn More
+## Структура
 
-To learn more about Next.js, take a look at the following resources:
+```
+public/     статические файлы
+src/app/    страницы и компоненты (Next.js App Router)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Планы
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [ ] Доработка кнопок для действий
+- [ ] Адаптивная вёрстка под мобильные устройства
+- [ ] Деплой на Vercel
+- [ ] Поиск и фильтр треков
 
-## Deploy on Vercel
+## Автор
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Анатолий Константинов, frontend-разработчик.
+[GitHub](https://github.com/TOLIKLOL777) · Telegram: [@TOLIKLOL777](https://t.me/TOLIKLOL777)
