@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '@/store/store';
 import {
   setCurrentPlaylist,
   setCurrentTrack,
+  setIsPlay,
 } from '@/store/features/trackSlice';
 import classNames from 'classnames';
 import { useLikeTrack } from '@/hooks/useLikeTracks';
@@ -29,6 +30,7 @@ export default function Track({ track, playlist }: TrackProps) {
   const onClickTrack = () => {
     dispatch(setCurrentTrack(track));
     dispatch(setCurrentPlaylist(playlist));
+    dispatch(setIsPlay(true));
   };
 
   const handleLike = (e: React.MouseEvent) => {

@@ -47,8 +47,6 @@ export default function Bar() {
 
   const onTimeUpdate = () => {
     if (audioRef.current) {
-      console.log('Current Time:', audioRef.current.currentTime);
-      console.log('Duration:', audioRef.current.duration);
       setTimePanel(
         getTimePanel(audioRef.current.currentTime, audioRef.current.duration) ??
           '0:00 / 0:00',
