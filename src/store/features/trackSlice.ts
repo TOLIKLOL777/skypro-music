@@ -11,6 +11,12 @@ type initialStateType = {
   allTracks: TrackType[];
   fetchError: null | string;
   fetchIsLoading: boolean;
+  filters: {
+    authors: string[];
+    genres: string[];
+    years: string;
+    search: string;
+  };
 };
 
 const initialState: initialStateType = {
@@ -23,6 +29,12 @@ const initialState: initialStateType = {
   allTracks: [],
   fetchError: null,
   fetchIsLoading: true,
+  filters: {
+    authors: [],
+    genres: [],
+    years: 'По умолчанию',
+    search: '',
+  },
 };
 
 const trackSlice = createSlice({
@@ -95,6 +107,40 @@ const trackSlice = createSlice({
         state.currentTrack = playlistToUse[prevIndex];
       }
     },
+    setFilterAuthors: (state, action: PayloadAction<string>) => {
+      const author = action.payload;
+      if (state.filters.authors.includes(author)) {
+        state.filters.authors = state.filters.authors.filter((el) => {
+          return el !== author;
+        });
+      } else {
+        state.filters.authors = [...state.filters.authors, author];
+      }
+    },
+    setFilterGenres: (state, action: PayloadAction<string>) => {
+      const genre = action.payload;
+      if (state.filters.genres.includes(genre)) {
+        state.filters.genres = state.filters.genres.filter((el) => {
+          return el !== genre;
+        });
+      } else {
+        state.filters.genres = [...state.filters.genres, genre];
+      }
+    },
+    setFilterYears: (state, action: PayloadAction<string>) => {
+      state.filters.years = action.payload;
+    },
+    setFilterSearch: (state, action: PayloadAction<string>) => {
+      state.filters.search = action.payload;
+    },
+    resetFilters: (state) => {
+      state.filters = {
+        authors: [],
+        genres: [],
+        years: 'По умолчанию',
+        search: '',
+      };
+    },
   },
 });
 
@@ -111,5 +157,10 @@ export const {
   setFavoriteTracks,
   addLikedTracks,
   removeLikedTracks,
+  setFilterAuthors,
+  setFilterGenres,
+  setFilterYears,
+  setFilterSearch,
+  resetFilters,
 } = trackSlice.actions;
 export const trackSliceReducer = trackSlice.reducer;
