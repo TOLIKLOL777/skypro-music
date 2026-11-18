@@ -16,6 +16,7 @@ import {
   setRefreshToken,
 } from '@/store/features/authSlice';
 import Image from 'next/image';
+import { toast } from 'react-toastify';
 
 export default function SignUp() {
   const router = useRouter();
@@ -65,23 +66,26 @@ export default function SignUp() {
       .then((res) => {
         dispatch(setAccessToken(res.access));
         dispatch(setRefreshToken(res.refresh));
+        toast.success('Регистрация прошла успешно!');
         router.replace('/music/main');
       })
       .catch((err) => {
+        let msg = 'Неизвестная ошибка';
         if (err instanceof AxiosError) {
           if (err.response) {
             const data = err.response.data as { message?: string } | string;
-            setError(
+            msg =
               typeof data === 'string'
                 ? data
-                : data?.message || 'Ошибка регистрации',
-            );
+                : data?.message || 'Ошибка регистрации';
           } else if (err.request) {
-            setError('Отсутствует интернет');
+            msg = 'Отсутствует интернет';
           } else {
-            setError(`Неизвестная ошибка: ${err.message}`);
+            msg = `Неизвестная ошибка: ${err.message}`;
           }
         }
+        setError(msg);
+        toast.error(msg);
       })
       .finally(() => {
         setIsLoading(false);

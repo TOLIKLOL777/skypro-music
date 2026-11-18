@@ -1,9 +1,14 @@
 .bar {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-width: 1920px;
   width: 100%;
-  background: rgba(28, 28, 28, 0.5);
+  z-index: 100;
+  background: rgba(28, 28, 28, 0.95);
+  backdrop-filter: blur(8px);
 }
 
 .bar__content {
@@ -86,6 +91,33 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition:
+    color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.player__btnPrev,
+.player__btnPlay,
+.player__btnNext {
+  color: #d9d9d9;
+}
+
+.player__btnPrev:hover,
+.player__btnPlay:hover,
+.player__btnNext:hover {
+  color: #ffffff;
+}
+
+.player__btnPrev:active,
+.player__btnPlay:active,
+.player__btnNext:active {
+  color: #ffffff;
+  transform: scale(0.95);
 }
 
 .player__btnPrev {
@@ -104,46 +136,55 @@
 .player__btnPlaySvg {
   width: 22px;
   height: 20px;
-  fill: #d9d9d9;
 }
 
 .player__btnNext {
   margin-right: 28px;
-  fill: #a53939;
 }
 
 .player__btnNextSvg {
   width: 15px;
   height: 14px;
-  fill: inherit;
-  stroke: #d9d9d9;
 }
 
 .player__btnRepeat {
   margin-right: 24px;
+  color: #696969;
 }
 
 .player__btnRepeatSvg {
   width: 18px;
   height: 12px;
-  fill: transparent;
-  stroke: #696969;
+  fill: currentColor;
 }
 
 .player__btnShuffle {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  color: #696969;
 }
 
 .player__btnShuffleSvg {
   width: 19px;
   height: 12px;
-  fill: transparent;
-  stroke: #696969;
+  fill: currentColor;
+}
+
+.player__btnRepeat:hover,
+.player__btnShuffle:hover {
+  color: #acacac;
+}
+
+.player__btnRepeat:active,
+.player__btnShuffle:active {
+  color: #ffffff;
+  transform: scale(0.95);
+}
+
+.player__btnActive {
+  color: #ffffff !important;
+}
+
+.player__btnActive:hover {
+  color: #d9d9d9 !important;
 }
 
 .player__trackPlay {
@@ -193,6 +234,7 @@
   height: 17px;
   fill: transparent;
   stroke: #4e4e4e;
+  color: #4e4e4e;
 }
 
 .trackPlay__author {
@@ -240,27 +282,56 @@
   margin-left: 26%;
 }
 
-.trackPlay__like,
-.trackPlay__dislike {
+.trackPlay__like {
   padding: 5px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease;
 }
 
 .trackPlay__likeSvg {
-  width: 14px;
-  height: 12px;
-  fill: transparent;
-  stroke: #696969;
-}
-
-.trackPlay__dislike {
-  margin-left: 28.5px;
-}
-
-.trackPlay__dislikeSvg {
-  width: 14.34px;
+  width: 15px;
   height: 13px;
-  fill: transparent;
+  fill: none;
   stroke: #696969;
+  transition:
+    stroke 0.2s ease,
+    fill 0.2s ease;
+}
+
+.trackPlay__like:hover .trackPlay__likeSvg {
+  fill: none !important;
+  stroke: #acacac !important;
+}
+
+.trackPlay__like:active {
+  transform: scale(0.95);
+}
+
+.trackPlay__like:active .trackPlay__likeSvg {
+  fill: #696969 !important;
+  stroke: #ffffff !important;
+}
+
+.trackPlay__like_active .trackPlay__likeSvg {
+  fill: #696969 !important;
+  stroke: #ffffff !important;
+}
+
+.trackPlay__like_active:hover .trackPlay__likeSvg {
+  fill: #696969 !important;
+  stroke: #ffffff !important;
+  opacity: 0.8;
+}
+
+.trackPlay__like_active:active .trackPlay__likeSvg {
+  fill: #696969 !important;
+  stroke: #ffffff !important;
 }
 
 .volume__content {
@@ -283,12 +354,31 @@
   width: 13px;
   height: 18px;
   margin-right: 17px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.volume__image:hover {
+  color: #acacac;
+}
+
+.volume__image:active {
+  color: #ffffff;
+  transform: scale(0.95);
 }
 
 .volume__svg {
   width: 13px;
   height: 18px;
-  fill: transparent;
 }
 
 .volume__progress {
@@ -350,21 +440,6 @@
   cursor: pointer;
 }
 
-.btnIcon:hover svg {
-  fill: transparent;
-  stroke: #acacac;
-  cursor: pointer;
-}
-
-.btnIcon:active svg {
-  fill: transparent;
-  stroke: #ffffff;
-  cursor: pointer;
-}
-
-.btnIcon:active .trackPlay__likeSvg,
-.btnIcon:active .trackPlay__dislikeSvg {
-  fill: #696969;
-  stroke: #ffffff;
+.btnIcon {
   cursor: pointer;
 }

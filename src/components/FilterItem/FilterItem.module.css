@@ -48,11 +48,16 @@
 
 .filter__item {
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 
 .filter__item:hover {
-  color: #b672ff;
+  color: #d9b6ff;
   text-decoration: underline;
+}
+
+.filter__item:active {
+  color: #ad61ff;
 }
 
 .filter__button {
@@ -64,6 +69,27 @@
   border-radius: 60px;
   padding: 6px 20px;
   color: #ffffff;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.filter__button:hover {
+  color: #d9b6ff;
+  border-color: #d9b6ff;
+}
+
+.filter__button:active {
+  color: #ad61ff;
+  border-color: #ad61ff;
+  transform: scale(0.96);
 }
 
 .active {

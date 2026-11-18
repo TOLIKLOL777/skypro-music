@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import styles from './SideBar.module.css';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { AUTH_STORAGE_KEY, clearAuth } from '@/store/features/authSlice';
+import { toast } from 'react-toastify';
 
 export default function Sidebar() {
   const router = useRouter();
@@ -16,6 +17,7 @@ export default function Sidebar() {
     if (isAuth) {
       localStorage.removeItem(AUTH_STORAGE_KEY);
       dispatch(clearAuth());
+      toast.info('Вы вышли из системы');
     }
     router.push('/auth/signin');
   };
@@ -26,8 +28,14 @@ export default function Sidebar() {
         <p className={styles.sidebar__personalName}>
           {user?.username || user?.email || 'Гость'}
         </p>
-        <div className={styles.sidebar__icon} onClick={handleAuthAction}>
-          <svg>
+        <div
+          className={styles.sidebar__icon}
+          onClick={handleAuthAction}
+          role="button"
+          aria-label={isAuth ? 'Выйти' : 'Войти'}
+          title={isAuth ? 'Выйти' : 'Войти'}
+        >
+          <svg className={styles.sidebar__iconSvg}>
             <use xlinkHref="/img/icon/sprite.svg#logout"></use>
           </svg>
         </div>

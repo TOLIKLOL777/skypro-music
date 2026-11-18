@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { AUTH_STORAGE_KEY, clearAuth } from '@/store/features/authSlice';
+import { toast } from 'react-toastify';
 
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,6 +18,7 @@ export default function Navigation() {
   const handleLogout = () => {
     localStorage.removeItem(AUTH_STORAGE_KEY);
     dispatch(clearAuth());
+    toast.info('Вы вышли из системы');
     router.push('/auth/signin');
   };
 

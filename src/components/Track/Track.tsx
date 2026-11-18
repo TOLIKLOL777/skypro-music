@@ -72,7 +72,15 @@ export default function Track({ track, playlist }: TrackProps) {
           </Link>
         </div>
         <div className={styles.track__time}>
-          <svg className={styles.track__timeSvg} onClick={handleLike}>
+          <svg
+            className={classNames(styles.track__timeSvg, {
+              [styles.track__timeSvg_active]: isLike,
+            })}
+            onClick={handleLike}
+            aria-label={
+              isLike ? 'Удалить из избранного' : 'Добавить в избранное'
+            }
+          >
             <use
               xlinkHref={`/img/icon/sprite.svg#${isLike ? 'icon-like' : 'icon-dislike'}`}
             ></use>

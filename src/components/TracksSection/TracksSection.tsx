@@ -3,7 +3,7 @@
 import { PlaylistType, TrackType } from '@/sharedTypes/sharedTypes';
 import styles from './TracksSection.module.css';
 import { CenterBlock } from '@/components/CenterBlock/CenterBlock';
-import { use, useMemo } from 'react';
+import { use, useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { getTracks } from '@/services/tracks/tracksapi';
 import {
@@ -12,6 +12,7 @@ import {
   setFetchIsLoading,
 } from '@/store/features/trackSlice';
 import { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
 
 type TracksResult = {
   tracks: TrackType[];
@@ -45,6 +46,12 @@ export default function TracksSection({
 
   const error = tracksError || playlistData?.error;
   const playlist = playlistData?.playlist;
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   const displayedTracks = useMemo(() => {
     if (!playlist?.items) {
@@ -94,7 +101,7 @@ export default function TracksSection({
   };
 
   if (!tracksPromise && fetchIsLoading && !tracks.length && !error) {
-    return <p className={styles.loading}>Загрузка музыки...</p>;
+    return <CenterBlock tracks={[]} title="Треки" isLoading={true} />;
   }
 
   if (error) {

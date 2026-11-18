@@ -1,12 +1,12 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import styles from './page.module.css';
 import { Suspense, useEffect, useState } from 'react';
 import { getPlaylist } from '@/services/tracks/tracksapi';
 import { PlaylistType } from '@/sharedTypes/sharedTypes';
 import { AxiosError } from 'axios';
 import TracksSection from '@/components/TracksSection/TracksSection';
+import { CenterBlock } from '@/components/CenterBlock/CenterBlock';
 
 type PlaylistResult = {
   playlist: PlaylistType | null;
@@ -33,7 +33,7 @@ async function loadPlaylist(id: number): Promise<PlaylistResult> {
 export default function CategoryPage() {
   const params = useParams<{ id: string }>();
   const [playlist, setPlaylist] = useState<Promise<PlaylistResult> | null>(
-    null,
+    () => (params?.id ? loadPlaylist(Number(params.id)) : null),
   );
 
   useEffect(() => {
@@ -49,7 +49,9 @@ export default function CategoryPage() {
   };
 
   return (
-    <Suspense fallback={<p className={styles.loading}>Загрузка музыки...</p>}>
+    <Suspense
+      fallback={<CenterBlock tracks={[]} title="Подборка" isLoading={true} />}
+    >
       <TracksSection playlistPromise={playlist} onReload={handleReload} />
     </Suspense>
   );
