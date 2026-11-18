@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import styles from './CenterBlock.module.css';
 import { SearchBlock } from '../Search/SearchBlock';
 import Track from '@/components/Track/Track';
+import { TrackListSkeleton } from '@/components/Track/TrackSkeleton';
 import Filter from '../Filter/Filter';
 import { TrackType } from '@/sharedTypes/sharedTypes';
 import { useAppDispatch, useAppSelector } from '@/store/store';
@@ -14,9 +15,14 @@ import { resetFilters } from '@/store/features/trackSlice';
 type TrackProps = {
   tracks: TrackType[];
   title?: string;
+  isLoading?: boolean;
 };
 
-export function CenterBlock({ tracks, title = 'Треки' }: TrackProps) {
+export function CenterBlock({
+  tracks,
+  title = 'Треки',
+  isLoading = false,
+}: TrackProps) {
   const pathname = usePathname();
   const dispatch = useAppDispatch();
 
@@ -91,7 +97,9 @@ export function CenterBlock({ tracks, title = 'Треки' }: TrackProps) {
           </div>
         </div>
         <div className={styles.content__playlist}>
-          {filteredTracks.length === 0 ? (
+          {isLoading ? (
+            <TrackListSkeleton count={8} />
+          ) : filteredTracks.length === 0 ? (
             <p className={styles.content_null}>В этом плейлисте нет треков</p>
           ) : (
             filteredTracks.map((track) => (
