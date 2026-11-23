@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import './globals.css';
 import ReduxProvider from '@/store/ReduxProvider';
+import ToastProvider from '@/components/ToastProvider/ToastProvider';
 import { Suspense } from 'react';
 
 const montserrat = Montserrat({
@@ -23,7 +24,10 @@ export default function RootLayout({
     <html lang="en" className={`${montserrat.variable}`}>
       <body>
         <Suspense fallback={null}>
-          <ReduxProvider>{children}</ReduxProvider>
+          <ReduxProvider>
+            {children}
+            <ToastProvider />
+          </ReduxProvider>
         </Suspense>
       </body>
     </html>

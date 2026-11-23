@@ -16,6 +16,7 @@ import {
   setAuth,
   setRefreshToken,
 } from '@/store/features/authSlice';
+import { toast } from 'react-toastify';
 
 export default function Signin() {
   const router = useRouter();
@@ -63,18 +64,22 @@ export default function Signin() {
       .then((res) => {
         dispatch(setAccessToken(res.access));
         dispatch(setRefreshToken(res.refresh));
+        toast.success('Вы успешно вошли в аккаунт!');
         router.replace('/music/main');
       })
       .catch((err) => {
+        let msg = 'Неизвестная ошибка';
         if (err instanceof AxiosError) {
           if (err.response) {
-            setError(err.response.data.message);
+            msg = err.response.data.message || 'Ошибка входа';
           } else if (err.request) {
-            setError('Отсутствует интернет');
+            msg = 'Отсутствует интернет';
           } else {
-            setError(`Неизвестная ошибка: ${err.message}`);
+            msg = `Неизвестная ошибка: ${err.message}`;
           }
         }
+        setError(msg);
+        toast.error(msg);
       })
       .finally(() => {
         setIsLoading(false);

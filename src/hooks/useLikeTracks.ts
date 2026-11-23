@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/store/store';
 import { withReauth } from '@/utils/withReauth';
 import { AxiosError } from 'axios';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 type returnTypeHook = {
   isLoading: boolean;
@@ -24,6 +25,7 @@ export const useLikeTrack = (track: TrackType | null): returnTypeHook => {
 
   const toggleLike = () => {
     if (!accessToken || !refreshToken) {
+      toast.error('Войдите, чтобы добавлять треки в избранное');
       return setErrorMsg('Нет авторизации');
     }
 
@@ -40,17 +42,23 @@ export const useLikeTrack = (track: TrackType | null): returnTypeHook => {
       )
         .then(() => {
           dispatch(actionSlice(track));
+          toast.success(
+            isLike ? 'Трек удален из избранного' : 'Трек добавлен в избранное',
+          );
         })
         .catch((error) => {
+          let message = 'Неизвестная ошибка';
           if (error instanceof AxiosError) {
-            if (error.response) {
-              setErrorMsg(error.response.data.message);
+            if (error.response?.data?.message) {
+              message = error.response.data.message;
+            } else if (typeof error.response?.data === 'string') {
+              message = error.response.data;
             } else if (error.request) {
-              setErrorMsg('Произошла ошибка. Попробуйте позже');
-            } else {
-              setErrorMsg('Неизвестная ошибка');
+              message = 'Произошла ошибка. Попробуйте позже';
             }
           }
+          setErrorMsg(message);
+          toast.error(message);
         })
         .finally(() => {
           setIsLoading(false);

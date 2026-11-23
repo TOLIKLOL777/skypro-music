@@ -56,10 +56,12 @@ export default function FavoritesPage() {
             </button>
           </div>
         </div>
-      ) : isLoading && favoriteTracks.length === 0 ? (
-        <p className={styles.loading}>Загрузка музыки...</p>
       ) : (
-        <CenterBlock tracks={favoriteTracks} title="Мой плейлист" />
+        <CenterBlock
+          tracks={favoriteTracks}
+          title="Мой плейлист"
+          isLoading={isLoading && favoriteTracks.length === 0}
+        />
       )}
     </PrivateRoute>
   );

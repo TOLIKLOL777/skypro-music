@@ -56,6 +56,7 @@
   height: 17px;
   fill: transparent;
   stroke: #4e4e4e;
+  color: #4e4e4e;
 }
 
 .track__titleLink {
@@ -105,12 +106,32 @@
   color: #696969;
 }
 
+.track__time {
+  display: flex;
+  align-items: center;
+}
+
 .track__timeSvg {
-  width: 14px;
-  height: 12px;
+  width: 15px;
+  height: 13px;
   margin-right: 17px;
-  fill: transparent;
+  fill: none;
   stroke: #696969;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.track__timeSvg:hover {
+  opacity: 0.8;
+}
+
+.track__timeSvg_active {
+  fill: #b672ff !important;
+  stroke: #b672ff !important;
+}
+
+.track__timeSvg_active:hover {
+  opacity: 0.8;
 }
 
 .track__timeText {
