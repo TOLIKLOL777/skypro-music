@@ -1,0 +1,95 @@
+'use client';
+
+import Link from 'next/link';
+import styles from './Track.module.css';
+import { TrackType } from '@/sharedTypes/sharedTypes';
+import { formatTime } from '@/utils/helpers';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import {
+  setCurrentPlaylist,
+  setCurrentTrack,
+  setIsPlay,
+} from '@/store/features/trackSlice';
+import classNames from 'classnames';
+import { useLikeTrack } from '@/hooks/useLikeTracks';
+
+type TrackProps = {
+  track: TrackType;
+  playlist: TrackType[];
+};
+
+export default function Track({ track, playlist }: TrackProps) {
+  const { name, author, album, duration_in_seconds } = track;
+  const { isLoading, errorMsg, toggleLike, isLike } = useLikeTrack(track);
+  const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
+  const isPlay = useAppSelector((state) => state.tracks.isPlay);
+  const dispatch = useAppDispatch();
+
+  const isCurrentTrack = currentTrack?._id === track._id;
+
+  const onClickTrack = () => {
+    dispatch(setCurrentTrack(track));
+    dispatch(setCurrentPlaylist(playlist));
+    dispatch(setIsPlay(true));
+  };
+
+  const handleLike = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    toggleLike();
+  };
+
+  return (
+    <div className={styles.playlist__item} onClick={onClickTrack}>
+      <div className={styles.playlist__track}>
+        <div className={styles.track__title}>
+          <div className={styles.track__titleImage}>
+            {isCurrentTrack ? (
+              <span
+                className={classNames(styles.point, {
+                  [styles.pointActive]: isPlay,
+                })}
+              />
+            ) : (
+              <svg className={styles.track__titleSvg}>
+                <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
+              </svg>
+            )}
+          </div>
+          <div>
+            <Link className={styles.track__titleLink} href="">
+              {name} <span className={styles.track__titleSpan}></span>
+            </Link>
+          </div>
+        </div>
+        <div className={styles.track__author}>
+          <Link className={styles.track__authorLink} href="">
+            {author}
+          </Link>
+        </div>
+        <div className={styles.track__album}>
+          <Link className={styles.track__albumLink} href="">
+            {album}
+          </Link>
+        </div>
+        <div className={styles.track__time}>
+          <svg
+            className={classNames(styles.track__timeSvg, {
+              [styles.track__timeSvg_active]: isLike,
+            })}
+            onClick={handleLike}
+            aria-label={
+              isLike ? 'Удалить из избранного' : 'Добавить в избранное'
+            }
+          >
+            <use
+              xlinkHref={`/img/icon/sprite.svg#${isLike ? 'icon-like' : 'icon-dislike'}`}
+            ></use>
+          </svg>
+          <span className={styles.track__timeText}>
+            {formatTime(duration_in_seconds)}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}

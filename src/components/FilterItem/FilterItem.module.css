@@ -1,0 +1,121 @@
+.filter__wrapper {
+  position: relative;
+}
+
+.filter__wrapper:not(:last-child) {
+  margin-right: 10px;
+}
+
+.filter__popup {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 10;
+  padding: 34px;
+  background-color: #313131;
+  border-radius: 12px;
+}
+
+.filter__list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: max-content;
+  max-width: 248px;
+  height: max-content;
+  max-height: 237px;
+  padding-right: 24px;
+  overflow-y: auto;
+  list-style: none;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.filter__list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.filter__list::-webkit-scrollbar-track {
+  background-color: #4b4949;
+  border-radius: 10px;
+}
+
+.filter__list::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.filter__item {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.filter__item:hover {
+  color: #d9b6ff;
+  text-decoration: underline;
+}
+
+.filter__item:active {
+  color: #ad61ff;
+}
+
+.filter__button {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  border: 1px solid #ffffff;
+  border-radius: 60px;
+  padding: 6px 20px;
+  color: #ffffff;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.filter__button:hover {
+  color: #d9b6ff;
+  border-color: #d9b6ff;
+}
+
+.filter__button:active {
+  color: #ad61ff;
+  border-color: #ad61ff;
+  transform: scale(0.96);
+}
+
+.active {
+  border-color: #ad61ff;
+  color: #ad61ff;
+}
+
+.filter__item_active {
+  color: #ad61ff;
+  text-decoration: underline;
+}
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  background-color: #ad61ff;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  line-height: 13px;
+  font-weight: 500;
+  pointer-events: none;
+}

@@ -1,0 +1,127 @@
+.main__sidebar {
+  max-width: 418px;
+  padding: 20px 90px 20px 78px;
+}
+
+.sidebar__personal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding: 12px 0 15px 0;
+}
+
+.sidebar__personalName {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  margin-right: 16px;
+}
+
+.sidebar__icon {
+  width: 43px;
+  height: 43px;
+  background-color: #313131;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.sidebar__iconSvg {
+  width: 40px;
+  height: 40px;
+  color: #ffffff;
+  transition: color 0.2s ease;
+}
+
+.sidebar__icon:hover {
+  background-color: #4b4949;
+}
+
+.sidebar__icon:hover .sidebar__iconSvg {
+  color: #d9b6ff;
+}
+
+.sidebar__icon:active {
+  background-color: #2e2e2e;
+  transform: scale(0.95);
+}
+
+.sidebar__icon:active .sidebar__iconSvg {
+  color: #ad61ff;
+}
+
+.sidebar__block {
+  height: 100%;
+  padding: 240px 0 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.sidebar__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.sidebar__item {
+  width: 250px;
+  height: 150px;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.sidebar__item:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+}
+
+.sidebar__item:active {
+  transform: scale(0.98);
+}
+
+.sidebar__item:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.sidebar__link {
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar__img {
+  width: 100%;
+  height: auto;
+}

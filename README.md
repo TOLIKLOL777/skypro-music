@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# skypro-music
 
-## Getting Started
+Веб-приложение для прослушивания музыки. Учебный проект курса SkyPro, который я развиваю самостоятельно.
 
-First, run the development server:
+> Статус: в разработке.
+
+![alt text](image.png)
+
+## Что внутри
+
+- Список треков, загружающихся с API
+- Плеер: пауза, перемотка, громкость, перемешивание и зацикливание треков
+- Фильтрация треков по исполнителю, жанру и сортировка по году
+- Поиск треков в реальном времени
+- Авторизация и регистрация пользователей
+- Сохранение и вход по ACCESS и REFRESH токенам
+- Избранные треки и плейлисты по категориям
+- Приватный роутинг в разделе избранное
+- Адаптивная вёрстка под мобильные устройства и планшеты
+- Анимированные скелетоны загрузки
+- Всплывающие toast-уведомления
+
+## Реализованные фичи
+
+### Фича 1. Реализация skeleton
+
+Раньше при загрузке треков отображалась статичная надпись «Загрузка…» — это функционально, но выглядит устаревшим и не вовлекает пользователя.
+
+**Решение**  
+Внедрены анимированные скелетоны — современный стандарт UX, который:
+- визуально показывает процесс загрузки;
+- создает эффект «ожидания контента»;
+- делает интерфейс динамичным и профессиональным.
+
+**Преимущества** — в плавных анимациях вместо статичного текста и адаптивности.
+
+Полезные ссылки:
+- Документация skeleton: [npmjs.com/package/react-loading-skeleton](https://www.npmjs.com/package/react-loading-skeleton)
+- Документация загрузки в Next.js: [nextjs.org/docs/app/api-reference/file-conventions/loading](https://nextjs.org/docs/app/api-reference/file-conventions/loading)
+
+---
+
+### Фича 2. Реализация всплывающих подсказок
+
+Раньше в проекте ошибки и важные сообщения выводились через стандартные `alert` — это выглядело непрофессионально и ухудшало пользовательский опыт.
+
+**Решение**  
+Устаревшие `alert` заменены на современные toast-уведомления — они не блокируют интерфейс, выглядят стильно и поддерживают разные типы сообщений (ошибки, успешные действия, предупреждения).
+
+**Что это дает:**
+- **Красивый UI** — тосты гармонично вписываются в тёмную тему и общий дизайн приложения.
+- **Удобство** — сообщения исчезают автоматически и не требуют обязательного закрытия пользователем.
+- **Гибкость** — возможность настройки иконок, длительности показа, анимаций и стилей.
+
+Полезные ссылки:
+- Документация toast-уведомлений: [npmjs.com/package/react-toastify](https://www.npmjs.com/package/react-toastify)
+
+## Стек
+
+- [Next.js](https://nextjs.org) (App Router)
+- TypeScript
+- Redux Toolkit & React-Redux
+- react-loading-skeleton
+- react-toastify
+- Jest & React Testing Library
+- ESLint и Prettier для единого стиля кода
+
+## Запуск локально
+
+Нужна актуальная LTS-версия Node.js.
 
 ```bash
+git clone https://github.com/TOLIKLOL777/skypro-music.git
+cd skypro-music
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Откройте [http://localhost:3000](http://localhost:3000) в браузере.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Команды
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Команда         | Что делает                     |
+| --------------- | ------------------------------ |
+| `npm run dev`   | запускает dev-сервер           |
+| `npm run build` | собирает проект для продакшена |
+| `npm run start` | запускает собранную версию     |
+| `npm run lint`  | проверяет код ESLint           |
+| `npm test`      | запускает юнит-тесты с Jest    |
 
-## Learn More
+## Структура
 
-To learn more about Next.js, take a look at the following resources:
+```
+public/         статические файлы и иконки
+src/app/        страницы и роуты (Next.js App Router)
+src/components/ React-компоненты
+src/context/    контексты приложения
+src/hooks/      кастомные React-хуки
+src/store/      Redux Toolkit слайсы и хранилище
+src/utils/      вспомогательные функции и API-клиенты
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Планы
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [x] Адаптивная вёрстка под мобильные устройства
+- [x] Поиск и фильтр треков
+- [x] Скелетон-загрузка и всплывающие уведомления
+- [ ] Деплой на Vercel
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Автор
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Анатолий Константинов, frontend-разработчик.
+[GitHub](https://github.com/TOLIKLOL777) · Telegram: [@TOLIKLOL777](https://t.me/TOLIKLOL777)

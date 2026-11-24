@@ -7,15 +7,26 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css, scss,json,md}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css, scss,json,md}\"",
+    "test": "jest"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.13.0",
+    "@types/react-redux": "^7.1.35",
+    "axios": "^1.21.0",
+    "classnames": "^2.5.1",
     "next": "16.4.3",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "react-loading-skeleton": "^3.5.0",
+    "react-redux": "^9.3.1",
+    "react-toastify": "^11.2.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^16.4.3",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -25,6 +36,10 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.3",
     "eslint-plugin-prettier": "^5.5.7",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.5.2",
+    "jest-environment-jsdom": "^30.5.2",
+    "ts-jest": "^29.4.15",
     "typescript": "^5"
   }
 }
