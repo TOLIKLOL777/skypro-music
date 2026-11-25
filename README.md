@@ -2,9 +2,7 @@
 
 Веб-приложение для прослушивания музыки. Учебный проект курса SkyPro, который я развиваю самостоятельно.
 
-> Статус: в разработке.
-
-![alt text](image.png)
+![Главная страница](image.png)
 
 ## Что внутри
 
@@ -74,6 +72,7 @@ git clone https://github.com/TOLIKLOL777/skypro-music.git
 cd skypro-music
 npm install
 npm run dev
+npm test
 ```
 
 Откройте [http://localhost:3000](http://localhost:3000) в браузере.
